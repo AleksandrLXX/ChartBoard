@@ -14,6 +14,7 @@ html,body {
     --board1-col-3-row-1-h:430px;
     --board1-col-3-row-2-h:450px;
     --board1-col-3-row-3-h:630px;
+    --board1-col-1-row-2-col-1-w:60%;
     --light:#fff;
 }
 div{
@@ -74,6 +75,9 @@ div{
 }
 .board1-col-3-row-3{
     height: var(--board1-col-3-row-3-h);
+}
+.board1-col-1-row-2-col-1{
+    width: var(--board1-col-1-row-2-col-1-w);
 }
 
 

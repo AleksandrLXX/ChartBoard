@@ -23,8 +23,10 @@
 
 ### Tip:
 
-* ./src/pages/common/js/themeConfig.js 主题样式
+* ./src/pages/common/js/themeConfig.js 主题样式文件
+    * 在线主题编辑器<http://echarts.baidu.com/theme-builder/ > 导出的主题定义格式不符合 echarts 4, 需要适当转化
 * ./src/pages/index/js/fake.js 数据结构
+* echats 不支持 每个category的柱状图宽度自定义 
 
 
 

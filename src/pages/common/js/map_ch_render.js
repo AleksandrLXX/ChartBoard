@@ -1,7 +1,5 @@
 import echarts from 'echarts'
 import chinajs from './china'
-import themeConfig from './themeConfig';
-
 
 var geoCoordMap = {
     '海门': [121.15, 31.89],
@@ -210,7 +208,7 @@ var convertData = function (data) {
     return res;
 };
 var mergeOption = function(data,title){
-    return  Object.assign({},themeConfig.theme,{
+    return  {
         title: {
             text: title,
             subtext: 'data from PM25.in',
@@ -306,10 +304,10 @@ var mergeOption = function(data,title){
                 zlevel: 1
             }
         ]
-    })
+    }
 }
 var map_ch_render = (id, data, title) => {
-    var chart = echarts.init(document.getElementById(id),'dark');
+    var chart = echarts.init(document.getElementById(id),'user');
     // 绘制图表
     chart.setOption(mergeOption(data, title));
     return chart;

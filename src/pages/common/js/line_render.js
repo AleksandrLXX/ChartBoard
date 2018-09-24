@@ -1,12 +1,15 @@
 import echarts from 'echarts'
-import themeConfig from './themeConfig'
+
 
 var mergeOption = function (data, title) {
     let _data = data.sort((prev,next)=>prev.year-next.year)
-    return Object.assign({}, themeConfig.theme,{
+    return {
         xAxis: {
             type: 'category',
-            data: _data.map(item => item.year)
+            data: _data.map(item => item.year),
+            axisLine:{
+                show:true,
+            }
         },
         yAxis: {
             type: 'value'
@@ -22,10 +25,10 @@ var mergeOption = function (data, title) {
             data: _data.map(item => item.value),
             type: 'line'
         }]
-    })
+    }
 }
 var line_render = (id, data,title) => {
-    var chart = echarts.init(document.getElementById(id),'dark');
+    var chart = echarts.init(document.getElementById(id),'user');
     // 绘制图表
     chart.setOption(mergeOption(data,title));
     return chart;
