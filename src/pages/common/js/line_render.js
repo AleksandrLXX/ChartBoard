@@ -2,7 +2,7 @@ import echarts from 'echarts'
 
 
 var mergeOption = function (data, title) {
-    let _data = data.sort((prev,next)=>prev.year-next.year)
+    let _data = data.sort((prev,next)=>Number(prev.year)-Number(next.year))
     return {
         xAxis: {
             type: 'category',
