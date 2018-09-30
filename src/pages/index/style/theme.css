@@ -16,6 +16,9 @@ html,body {
     --board1-col-3-row-3-h:630px;
     --board1-col-1-row-2-col-1-w:60%;
     --light:#fff;
+    --fz:35px;
+    --main:#85baa2;
+    --gray:#ddd;
 }
 div{
     box-sizing: border-box;
@@ -23,6 +26,15 @@ div{
 
 .lump{
     background-color: rgba(0,0,255,.1);
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
 }
 
 .canvas-board {
@@ -35,6 +47,8 @@ div{
 .canvas-container{
     position: relative;
     background-color: #404a59;
+    color:var(--gray);
+    font-size: var(--fz);
 
 }
 .canvas-container:empty::after{
@@ -43,10 +57,22 @@ div{
     left:50%;top:50%;
     transform: translate(-50%,-50%);
     color:var(--light);
-    font-size: 50px;
     opacity: 0.8;
 }
-
+.board1-col-2-row-3 .canvas-container {
+    
+    font-weight: 500;
+    text-align: center;
+}
+.board1-col-2-row-3 .canvas-container>div>div{
+    width:20%;
+    
+}
+.board1-col-2-row-3 .canvas-container>div:first-child{
+    background-color: var(--main);
+    text-shadow:0 0 5px #fff;
+     color:var(--light);
+}
 .board1-col-1{
     width: var(--board1-col-1-w);
 }
