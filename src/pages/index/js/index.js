@@ -13,6 +13,7 @@ import radar_render from '../../common/js/radar_render.js'
 import mixed_render from '../../common/js/mixed_render.js'
 import ring_render from '../../common/js/ring_render.js'
 import polar_render from '../../common/js/polar_render.js'
+import map_world_render from '../../common/js/map_world_render.js'
 import board1Data from './fake.js'
 
 window.$= jQuery
@@ -222,3 +223,4 @@ var chart11 = $('#热门研究领域').html(`
 `)
 console.log(chart10Series)
 var chart10 = polar_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
+var chart11 = map_world_render('国际合作1')

@@ -37,6 +37,26 @@ div{
     text-align: center;
 }
 
+
+.canvas-board-container{
+    width: 3840px;
+    height: 2160px;
+}
+.canvas-board-wrapper{
+    position: relative;
+    overflow: visible;
+    
+    transition: left .3s ease;
+}
+.canvas-board-wrapper[data-tab='1']{
+    left:0;
+}
+.canvas-board-wrapper[data-tab='2']{
+    left:-100%;
+}
+.canvas-board-wrapper[data-tab='3']{
+     left:-200%;
+}
 .canvas-board {
     width: 3840px;
     height: 2160px;

@@ -7,48 +7,56 @@
 	<title>可视化表盘</title>
 </head>
 <body>
-    <div class="canvas-board canvas-board1 lump d-flex flex-row align-items-stretch">
-        <div class="board1-col-1 lump d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0" >
-            <div class="board1-col-1-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div id='成果数量(分年)' class='canvas-container flex-fill'></div>
-            </div>
-            <div class="board1-col-1-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div class='board1-col-1-row-2-col-1 flex-grow-0 flex-shrink-0 d-flex  flex-row align-items-stretch'>
-                    <div id='成果数量(分学科)' class='canvas-container flex-fill' ></div>
+    <div class="canvas-board-container" style="overflow:hidden">
+        <div class="canvas-board-wrapper lump d-flex flex-row align-items-stretch" data-tab='2'>
+            <div class="canvas-board canvas-board1 flex-shrink-0 lump d-flex flex-row align-items-stretch">
+                <div class="board1-col-1 lump d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0" >
+                    <div class="board1-col-1-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='成果数量(分年)' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-1-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div class='board1-col-1-row-2-col-1 flex-grow-0 flex-shrink-0 d-flex  flex-row align-items-stretch'>
+                            <div id='成果数量(分学科)' class='canvas-container flex-fill' ></div>
+                        </div>
+                        <div class='flex-fill d-flex flex-row align-items-stretch'>
+                            <div id='成果数量(分数据库)' class='canvas-container flex-fill'></div>
+                        </div>
+                    </div>
+                    <div class="board1-col-1-row-3 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='高被引及热点论文数量' class='canvas-container flex-fill'></div>
+                    </div>
                 </div>
-                <div class='flex-fill d-flex flex-row align-items-stretch'>
-                    <div id='成果数量(分数据库)' class='canvas-container flex-fill'></div>
+                <div class="board1-col-2  d-flex flex-column align-items-stretch flex-fill">
+                    <div class="board1-col-2-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <!-- <div id='成果数量(分学科)2' class='canvas-container flex-fill'></div> -->
+                    </div>
+                    <div class="board1-col-2-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='国内合作' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-2-row-3 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='ESI学科排名' class='canvas-container flex-fill d-flex flex-column align-items-stretch' style='overflow: hidden;'></div>
+                    </div>
+                </div>
+                <div class="board1-col-3  d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0">
+                    <div class="board1-col-3-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='各类型人才数量统计' class='canvas-container flex-fill d-flex flex-column align-items-stretch py-2' style='overflow: hidden;'></div>
+                    </div>
+                    <div class="board1-col-3-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='各类型人才数量统计2' class='canvas-container flex-fill d-flex flex-row align-items-stretch py-2 px-4' style='overflow: hidden;'></div>
+                    </div>
+                    <div class="board1-col-3-row-3 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='获奖统计' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-3-row-4 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='热门研究领域' class='canvas-container flex-fill'></div>
+                    </div>
                 </div>
             </div>
-            <div class="board1-col-1-row-3 d-flex flex-row align-items-stretch flex-fill">
-                <div id='高被引及热点论文数量' class='canvas-container flex-fill'></div>
+            <div class="canvas-board canvas-board2 flex-shrink-0 lump d-flex flex-row align-items-stretch">
+                <div id='国际合作1' class='canvas-container flex-fill'></div>
             </div>
         </div>
-        <div class="board1-col-2  d-flex flex-column align-items-stretch flex-fill">
-            <div class="board1-col-2-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <!-- <div id='成果数量(分学科)2' class='canvas-container flex-fill'></div> -->
-            </div>
-            <div class="board1-col-2-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div id='国内合作' class='canvas-container flex-fill'></div>
-            </div>
-            <div class="board1-col-2-row-3 d-flex flex-row align-items-stretch flex-fill">
-                <div id='ESI学科排名' class='canvas-container flex-fill d-flex flex-column align-items-stretch' style='overflow: hidden;'></div>
-            </div>
-        </div>
-        <div class="board1-col-3  d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0">
-            <div class="board1-col-3-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div id='各类型人才数量统计' class='canvas-container flex-fill d-flex flex-column align-items-stretch py-2' style='overflow: hidden;'></div>
-            </div>
-            <div class="board1-col-3-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div id='各类型人才数量统计2' class='canvas-container flex-fill d-flex flex-row align-items-stretch py-2 px-4' style='overflow: hidden;'></div>
-            </div>
-            <div class="board1-col-3-row-3 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
-                <div id='获奖统计' class='canvas-container flex-fill'></div>
-            </div>
-            <div class="board1-col-3-row-4 d-flex flex-row align-items-stretch flex-fill">
-                <div id='热门研究领域' class='canvas-container flex-fill'></div>
-            </div>
-        </div>
-    </div>    
+    </div>
+    
 </body>
 </html>
