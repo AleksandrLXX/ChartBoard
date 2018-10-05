@@ -13,6 +13,7 @@ import radar_render from '../../common/js/radar_render.js'
 import mixed_render from '../../common/js/mixed_render.js'
 import ring_render from '../../common/js/ring_render.js'
 import polar_render from '../../common/js/polar_render.js'
+import multi_ring_render from '../../common/js/multi_ring_render.js'
 import map_world_render from '../../common/js/map_world_render.js'
 import board1Data from './fake.js'
 
@@ -102,13 +103,7 @@ var chart10Series = new Set();
         temp_obj[item["级别"]].push(item)
     })
     chart10Data = Object.keys(temp_obj).map(key => {
-        let arr = temp_obj[key];
-        return Array.from(chart10Series).reduce(function(prev,next){
-            prev[next] = arr.find(item => item["学科"] == next) ? Number(arr.find(item => item["学科"] == next)["数量"]):0;
-            return prev;
-        }, {
-            category:key
-        })
+        return {category:key,items:temp_obj[key]}
     })
 }
 console.log(chart10Data)
@@ -127,6 +122,7 @@ var chart5 = chart5Data.map((item,index)=>{
     $('.board1-col-2-row-1').append(` <div id='成果数量(分学科)${index}' class='canvas-container flex-1' style='width:${100/c5l}%'></div>`)
     ring_render(`成果数量(分学科)${index}`, chart5Data, item.name)
 }) 
+console.log('chart5Data',chart5Data)
 var chart6 = map_ch_render('国内合作',board1Data['国内合作'])
 
 
@@ -222,5 +218,5 @@ var chart11 = $('#热门研究领域').html(`
     </svg>
 `)
 console.log(chart10Series)
-var chart10 = polar_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
+var chart10 = multi_ring_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
 var chart11 = map_world_render('国际合作1')

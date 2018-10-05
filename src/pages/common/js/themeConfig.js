@@ -58,7 +58,8 @@ var theme = {
     },
     title: {
         textStyle: {
-            color: contrastColor
+            color: contrastColor,
+            fontSize:50,
         }
     },
     toolbox: {
