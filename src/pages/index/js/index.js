@@ -17,6 +17,7 @@ import multi_ring_render from '../../common/js/multi_ring_render.js'
 import map_world_render from '../../common/js/map_world_render.js'
 import board1Data from './fake.js'
 
+
 window.$= jQuery
 // 需要是 echarts 4 的配置方法
 echarts.registerTheme('user', userTheme)
@@ -30,13 +31,14 @@ const arr2obj = (arr,key='id')=>{
     return obj
 }
 
-var chart1Data = arr2obj(board1Data['成果数量(分年)'], 'type')
+var chart1Data = arr2obj(board1Data['成果数量（分年）'], '成果类型')
+
 var chart2Data;
 var chart2Series = new Set();
 {
     let temp_obj = {}
     let hasIssueType = false;
-    board1Data['成果数量(分学科)'].map(item=>{
+    board1Data['成果数量（分学科）'].map(item=>{
         !chart2Series.has(item["学科"]) && chart2Series.add(item["学科"])
         item["论文类型"] && (hasIssueType = true)
         item["论文类型"] && !chart2Series.has(item["论文类型"]) && chart2Series.add(item["论文类型"])
@@ -57,7 +59,7 @@ var chart2Series = new Set();
 
 console.log(chart2Data)
 
-var chart3Data = board1Data['成果数量(分数据库)'].map(item=>{
+var chart3Data = board1Data['成果数量（分数据库）'].map(item=>{
     item.key = item["来源数据库"]
     item.value = item["成果数量"]
     return item;
@@ -84,11 +86,11 @@ var chart5Data = (function(arr) {
         delete obj["论文"]
     }
     return Object.keys(obj).map(item=>{ return {name:item,value:obj[item]}})
-})(board1Data['成果数量(分学科)']);
+})(board1Data['成果数量（分学科）']);
 
 var chart7Data = board1Data['ESI学科排名']
-var chart8Data = board1Data['各类型人才数量统计'].filter(item=>new Set(["高级人才","杰出人才","教学科研人员","全校教职工"]).has(item["人才类型"]))
-var chart8DataTotal = Number(chart8Data.find(item=>item["人才类型"]=='全校教职工')["数量"])
+var chart8Data = board1Data['各类型人才数量统计'].filter(item=>new Set(["高级人才","杰出人才","教学科研人员","全校在编教职工"]).has(item["人才类型"]))
+var chart8DataTotal = Number(chart8Data.find(item=>item["人才类型"]=='全校在编教职工')["数量"])
 
 var chart9Data = board1Data['各类型人才数量统计'].filter(item=>!new Set(["高级人才","杰出人才","教学科研人员","全校教职工"]).has(item["人才类型"]))
 var chart10Data;
@@ -208,7 +210,8 @@ var chart11 = $('#热门研究领域').html(`
         ${chart11Data.sort(()=>Math.random()-0.5).map((item,index)=>{
             let dur = Math.random()*2+1.5;
             let delay = index*0.3;
-            return `<text x='${index==0?400:index*150+Math.random()*200-200}'  y='1000' opacity='0' fill='${colorScale(item.value)}' font-size='${sizeScale(item.value)}'>
+            let interval = 1020/chart11Data.length
+            return `<text x='${index==0?400:index*interval+Math.random()*200-100}'  y='1000' opacity='0' fill='${colorScale(item.value)}' font-size='${sizeScale(item.value)}'>
             ${item.key}
             <animate attributeName='y' values='1000;200 ' begin='+${delay}s' dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  
             <animate attributeName='opacity' values='0;1;1;1;0'  begin='+${delay}s'  dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  

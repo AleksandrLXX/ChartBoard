@@ -2,11 +2,11 @@ import echarts from 'echarts'
 
 
 var mergeOption = function (data, title) {
-    let _data = data.sort((prev,next)=>Number(prev.year)-Number(next.year))
+    let _data = data.sort((prev,next)=>Number(prev["出版年"])-Number(next["出版年"]))
     return {
         xAxis: {
             type: 'category',
-            data: _data.map(item => item.year),
+            data: _data.map(item => item["出版年"]),
             axisLine:{
                 show:true,
             }
@@ -22,7 +22,7 @@ var mergeOption = function (data, title) {
 
         },
         series: [{
-            data: _data.map(item => item.value),
+            data: _data.map(item => item["成果数量"]),
             type: 'line'
         }]
     }
