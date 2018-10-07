@@ -148,8 +148,8 @@ var chart8 = $('#各类型人才数量统计').html(
             var rate = Number(item['数量']) / chart8DataTotal * 100 - index * 10
             if(rate>0){
                 //至少显示一个
-                rate*=100
-                // rate*=10
+                // rate*=100
+                rate*=30
             }else{
                 rate=0
             }
@@ -194,7 +194,7 @@ var chart9 = $('#各类型人才数量统计2').html(`
 </div>  
 `)
 var colorPalette = ["#c1232b", "#d7504b", "#e87c25", "#fe8463", "#c6e579", "#9bca63","#60c0dd","#26c0c0","#27727b","#aaaaaa"]
-var sizeRange = [50,80]
+var sizeRange = [40,100]
 var upBound = chart11Data[0].value
 var downBound = chart11Data[chart11Data.length-1].value
 var sizeScale = function(val){
@@ -206,20 +206,20 @@ var colorScale = function(val){
 var chart11 = $('#热门研究领域').html(`
     <svg  class="icon" style="margin:0 0" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
     width="${$('#热门研究领域').width()}" height="${$('#热门研究领域').height()}">
-        <text x='-200'  y='100' fill='#fff' font-size='80'>热门研究领域</text>
+        <text x='-330'  y='100' fill='#fff' font-size='80'>热门研究领域</text>
         ${chart11Data.sort(()=>Math.random()-0.5).map((item,index)=>{
-            let dur = Math.random()*2+1.5;
-            let delay = index*0.3;
+            let dur = (Math.random()*4+2.5)*2;
+            let delay = index*0.15+0.5;
             let interval = 1020/chart11Data.length
-            return `<text x='${index==0?400:index*interval+Math.random()*200-100}'  y='1000' opacity='0' fill='${colorScale(item.value)}' font-size='${sizeScale(item.value)}'>
+            return `<text x='${index==0?400:index*interval+Math.random()*100-200}'  y='1000' opacity='0' fill='${colorScale(item.value)}' font-size='${sizeScale(item.value)}'>
             ${item.key}
-            <animate attributeName='y' values='1000;200 ' begin='+${delay}s' dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  
-            <animate attributeName='opacity' values='0;1;1;1;0'  begin='+${delay}s'  dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  
+            <animate attributeName='y' values='1000;200;200' begin='+${delay}s' dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  
+            <animate attributeName='opacity' values='0;0.5;1;1;1;1;1;1;0.5;0;0;0;0;0;0;0;0;0;0;0;0'  begin='+${delay}s'  dur='${dur}s' fill='remove' repeatCount='indefinite'></animate>  
             
          </text>
         `}).join('')}
     </svg>
 `)
-console.log(chart10Series)
+console.log(chart1.getOption())
 var chart10 = multi_ring_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
 var chart11 = map_world_render('国际合作1')

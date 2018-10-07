@@ -3,6 +3,7 @@ import echarts from 'echarts'
 var mergeOption = function (data, title) {
     let _data = data.sort((prev,next)=>next.name==title?1:-1)
     return {
+        color: ['#7ba79d', 'transparent', 'transparent', 'transparent', 'transparent', 'transparent', 'transparent'],
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -24,6 +25,10 @@ var mergeOption = function (data, title) {
             type: 'pie',
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
+            itemStyle:{
+                borderColor: "#7ba79d",
+                borderWidth:2,
+            },
             label: {
                 normal: {
                     show: true,

@@ -6,14 +6,20 @@ var mergeOption = function (data, title) {
     return {
         xAxis: {
             type: 'category',
-            data: _data.map(item => item["出版年"]),
+            data: _data.map(item =>{
+                return {
+                    value:item["出版年"]
+                }
+            }),
             axisLine:{
                 show:true,
             }
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            // min:'dataMin'
         },
+        
         title: {
             left: 'center',
             top: 30,
@@ -22,6 +28,11 @@ var mergeOption = function (data, title) {
 
         },
         series: [{
+            symbol: 'emptyCircle',
+            symbolSize:12,
+            lineStyle:{
+                width:4
+            },
             data: _data.map(item => item["成果数量"]),
             type: 'line'
         }]

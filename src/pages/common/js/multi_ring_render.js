@@ -20,8 +20,14 @@ var mergeOption = function (data,title,series,width,height) {
         legend: {
             show:true,
             // orient: 'vertical',
-            x: 'center',
-            data:series
+            x: 'right',
+            padding:20,
+            data:series.map(item=>{
+                return {
+                    name:item,
+                    icon: 'path://M10 15 v 80 h 80 v -80 z'
+                }
+            })
         },
         // 辅助图形
         graphic:{
@@ -47,7 +53,7 @@ var mergeOption = function (data,title,series,width,height) {
                 name: item.category,
                 type: 'pie',
                 center:[100/len*(1/2+index)+'%','50%'],
-                radius: ['40%', '50%'],
+                radius: ['38%', '50%'],
                 avoidLabelOverlap: false,
                 label: {
                     
@@ -78,12 +84,13 @@ var mergeOption = function (data,title,series,width,height) {
                 name: item.category,
                 type: 'pie',
                 center:[100/len*(1/2+index)+'%','50%'],
-                radius: ['30%', '40%'],
+                radius: ['26%', '38%'],
                 avoidLabelOverlap: false,
                 itemStyle:{
                     color:params=>{
                        return ['#d0dfeb','#d7dacb','#c5d8d4','#94b6d2'][params.dataIndex]
                     },
+                    borderWidth:0
                 },
                 label: {
                     normal: {
@@ -120,9 +127,10 @@ var mergeOption = function (data,title,series,width,height) {
                 name: item.category,
                 type: 'pie',
                 center:[100/len*(1/2+index)+'%','50%'],
-                radius: ['0%', '30%'],
+                radius: ['0%', '26%'],
                 itemStyle:{
                     color:'#abafb6',
+                    borderWidth: 0
                 },
                 avoidLabelOverlap: false,
                 label: {

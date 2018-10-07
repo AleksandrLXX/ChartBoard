@@ -16,9 +16,11 @@ var axisCommon = function () {
         },
         axisLabel: {
             textStyle: {
-                color: contrastColor
+                color: contrastColor,
+                fontSize:21
             }
         },
+        
         splitLine: {
             lineStyle: {
                 type: 'dashed',
@@ -34,7 +36,7 @@ var axisCommon = function () {
     };
 };
 
-var colorPalette = ['#dd6b66', '#759aa0', '#e69d87', '#8dc1a9', '#ea7e53', '#eedd78', '#73a373', '#73b9bc', '#7289ab', '#91ca8c', '#f49f42'];
+var colorPalette = ['#7ba79d', '#759aa0', '#e69d87', '#8dc1a9', '#ea7e53', '#eedd78', '#73a373', '#73b9bc', '#7289ab', '#91ca8c', '#f49f42'];
 var theme = {
     color: colorPalette,
     backgroundColor: '#404a59',
@@ -50,16 +52,19 @@ var theme = {
     },
     legend: {
         textStyle: {
-            color: contrastColor
+            color: contrastColor,
+            fontSize: 26,
         }
     },
     textStyle: {
-        color: contrastColor
+        color: contrastColor,
+        fontSize:21,
     },
     title: {
         textStyle: {
             color: contrastColor,
             fontSize:50,
+            fontWeight:'normal',
         }
     },
     toolbox: {
@@ -124,7 +129,8 @@ var theme = {
                 borderColor0: '#0CF49B'
             }
         }
-    }
+    },
+    
 };
 theme.categoryAxis.splitLine.show = false;
 

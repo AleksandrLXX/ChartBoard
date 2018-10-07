@@ -1,4 +1,4 @@
-var mMapPlace = [{
+export var mMapPlace = [{
 	"name": "北京市",
 	"log": "116.46",
 	"lat": "39.92",
@@ -9221,7 +9221,7 @@ var mMapPlace = [{
 		"lat": "31.16"
 	}]
 }]
-const country = {
+export const country = {
     "阿富汗": [69.11, 34.28],
     "阿尔巴尼亚": [19.49, 41.18],
     "阿尔及利亚": [3.08, 36.42],

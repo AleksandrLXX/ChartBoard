@@ -25,7 +25,9 @@ var labelOption = {
  */
 var mergeOption = function (data, series) {
     let _data = data
+
     return {
+        color:["#968c8c","#7ba79d","#d8b25c",'#5b5353','#94b6d2','#a5ab81','#d7dacb','#c5d8d4'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {

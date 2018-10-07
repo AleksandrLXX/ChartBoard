@@ -35,34 +35,51 @@ var mergeOption = function (data, title) {
         legend: {
             data: ['hot papers', 'top papers'],
             left:"center",
-            top:"bottom"
+            top:"bottom",
+            padding:40,
+            itemGap:30
+        },
+        grid:{
+            bottom:'20%',
         },
         xAxis:[{
             type: 'category',
             data: _data.map(item=>item.year),
             axisPointer: {
                 type: 'shadow'
+            },
+            axisLine: {
+                show: true,
             }
         }],
         yAxis: [{
                 type: 'value',
-                name: "hot papers"
+                name: "hot papers",
+                nameTextStyle:{
+                    color:'transparent'
+                }
                 
         }, {
             type: 'value',
             name: "top papers",
+            show:false,
             // show:false
 
         }],
         series: [{
                 name: 'hot papers',
                 type: 'bar',
+                barWidth:'50%',
                 data: _data.map(item => item["热点论文"])
             },
-            
             {
                 name: 'top papers',
                 type: 'line',
+                symbol: 'emptyCircle',
+                symbolSize: 12,
+                lineStyle: {
+                    width: 4
+                },
                 yAxisIndex: 1,
                 data: _data.map(item => item["高被引论文"])
             }

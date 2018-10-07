@@ -2,11 +2,11 @@ import echarts from 'echarts'
 
 
 var mergeOption = function (data, title) {
-    let _data = data
+    let _data = data.sort((prev, next) => Number(prev['优先级顺序']) - Number(next['优先级顺序'])).slice(0, 6)
     let max = _data.map(item=>Number(item.value)).reduce((prev,next)=>{
-        next = prev+next
+        next = Math.max(prev,next)
         return next
-    },0)
+    },0)*1.2
     return {
         
         title: {
@@ -38,6 +38,11 @@ var mergeOption = function (data, title) {
             name: '成果数量',
             type: 'radar',
             // areaStyle: {normal: {}},
+            symbol: 'emptyCircle',
+            symbolSize: 12,
+            lineStyle: {
+                width: 4
+            },
             data: [{
                     value:_data.map(item=>item.value),
                     name: '成果数量'
