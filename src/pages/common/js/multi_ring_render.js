@@ -11,6 +11,11 @@ var mergeOption = function (data,title,series,width,height) {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
+        splitArea:{
+            areaStyle:{
+                color:'#f0f'
+            }
+        },
         title:{
             text:title,
             top:'top',
@@ -70,9 +75,12 @@ var mergeOption = function (data,title,series,width,height) {
                     
                 },
                 labelLine: {
-                    normal: {
-                        show: false
-                    }
+                    show:false,
+                },
+                itemStyle: {
+                    borderColor:'transparent',
+                    borderWidth: 0,
+                    shadowColor:'rgba(0, 0, 0, 0.0)'
                 },
                 data: item.items.map(i_item=> {
                     return {
@@ -117,6 +125,7 @@ var mergeOption = function (data,title,series,width,height) {
                         show: false
                     }
                 },
+                
                 data: item.items.map(i_item=> {
                     return {
                         name:i_item['学科'],

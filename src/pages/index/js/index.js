@@ -220,6 +220,6 @@ var chart11 = $('#热门研究领域').html(`
         `}).join('')}
     </svg>
 `)
-console.log(chart1.getOption())
 var chart10 = multi_ring_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
 var chart11 = map_world_render('国际合作1')
+console.log(chart10.getOption())
