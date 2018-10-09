@@ -17,7 +17,7 @@ var axisCommon = function () {
         axisLabel: {
             textStyle: {
                 color: contrastColor,
-                fontSize:21
+                fontSize:30
             }
         },
         

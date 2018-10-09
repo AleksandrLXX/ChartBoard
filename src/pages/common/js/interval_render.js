@@ -39,29 +39,117 @@ var mergeOption = function (data, series) {
         },
         calculable: true,
         xAxis: [{
+            gridIndex:0,
             type: 'category',
             axisTick: {
                 show: false
             },
-            data: _data.map(item=>item.category)
-        }],
+            data: _data[0].category
+        },
+         {
+            gridIndex: 1,
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            data: _data[1].category
+        }, {
+            gridIndex: 2,
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            data: _data[2].category
+        }, {
+            gridIndex: 3,
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            data: _data[3].category
+        }, {
+            gridIndex: 4,
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            data: _data[4].category
+        } 
+    ],
+        grid:[
+            {   
+                // id:'期刊论文',
+                bottom:'10%',
+                width:'15%',
+                left:'20%',
+            },
+            {   
+                // id:'会议论文',
+                bottom:'10%',
+                width: '15%',
+                left:'32%',
+            },
+            {   
+                // id:'学位论文',
+                bottom:'10%',
+                 width: '15%',
+                left:'44%',
+            },
+            {   
+                // id:'图书',
+                bottom:'10%',
+                 width: '35%',
+                left:'55%',
+            },
+            {   
+                // id:'专利',
+                bottom:'10%',
+                width: '35%',
+                left:'75%',
+            },
+        ],
         yAxis: [{
+            gridIndex: 0,
             type: 'value'
-        }],
-        series: series.map(serie=>{
-            return {
-                name:serie,
-                type:'bar',
-                barGap:0,
-                label: labelOption,
-                data: _data.map((item, index) => item[serie]?[index, item[serie]]:undefined).filter(item=>item)
-            }
-        })
+        }, {
+            gridIndex: 1,
+            type: 'value',
+            show:false
+        }, {
+            gridIndex: 2,
+            type: 'value',
+                show: false
+        }, {
+            gridIndex: 3,
+            type: 'value',
+                show: false
+        }, {
+            gridIndex: 4,
+            type: 'value',
+                show: false
+        }, ],
+        series:_data.reduce((prev,next)=>{
+            prev.push(...series.map(serie => {
+                return {
+                    name: serie,
+                    type: 'bar',
+                    barGap: 0,
+                    barWidth: next.stack ? '100%': 'auto',
+                    stack: next.stack?'成果'+next.category:null,
+                    xAxisIndex: next.index,
+                    yAxisIndex: next.index,
+                    label: labelOption,
+                    data: [next[serie]]
+                }
+            }))
+            return prev;
+        },[])
     }
 }
 var interval_render = (id, data, series) => {
     var chart = echarts.init(document.getElementById(id), 'user');
     // 绘制图表
+    console.log('option',mergeOption(data, series))
     chart.setOption(mergeOption(data, series));
     return chart;
 }

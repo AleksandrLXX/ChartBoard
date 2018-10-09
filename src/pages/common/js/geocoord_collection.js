@@ -2455,8 +2455,8 @@ export var mMapPlace = [{
 	}]
 }, {
 	"name": "山东省",
-	"log": "106.54",
-	"lat": "29.59",
+	"log": "117",
+	"lat": "36.65",
 	"children": [{
 		"name": "济南",
 		"log": "117",

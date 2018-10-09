@@ -13,6 +13,7 @@ var mergeOption = function (data, title) {
             text: title,
             show:false,
         },
+        
         tooltip: {},
         legend: {
             show:false,
@@ -21,12 +22,16 @@ var mergeOption = function (data, title) {
             // shape: 'circle',
             name: {
                 textStyle: {
+                    fontSize:30,
                     color: '#fff',
-                    // backgroundColor: '#999',
+                    rotate:true,
                     borderRadius: 3,
-                    padding: [3, 5]
+                    padding: [0, -5]
                 }
             },
+             splitArea: {
+                 show: false
+             },
             indicator: _data.map(item=>{
                 return {
                     name:item.key,
@@ -39,7 +44,7 @@ var mergeOption = function (data, title) {
             type: 'radar',
             // areaStyle: {normal: {}},
             symbol: 'emptyCircle',
-            symbolSize: 12,
+            symbolSize: 20,
             lineStyle: {
                 width: 4
             },

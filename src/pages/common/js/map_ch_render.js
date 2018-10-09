@@ -22,8 +22,8 @@ var mergeOption = function(data,title){
         title: {
             show:false,
             text: title,
-            subtext: 'data from PM25.in',
-            sublink: 'http://www.pm25.in',
+            subtext: '国内合作',
+            sublink: '',
             left: 'center',
             textStyle: {
                 color: '#fff'
@@ -40,7 +40,8 @@ var mergeOption = function(data,title){
             padding:20,
             textStyle: {
                 color: '#fff'
-            }
+            },
+            show:false,
         },
         geo: {
             map: 'china',
@@ -62,11 +63,14 @@ var mergeOption = function(data,title){
         },
         series: [{
                 name: '国内合作',
-                type: 'effectScatter',
+                type: 'scatter',
                 coordinateSystem: 'geo',
-                data: convertData(data),
+                data: convertData(data.sort(function (a, b) {
+                    return b.value - a.value;
+                }).slice(5)),
                 symbolSize: function (val) {
-                    return val[2] / 20;
+                    return Math.max(10,Math.min(20,val[2] / 200));
+                    
                 },
                 rippleEffect: {
                     brushType: 'stroke'
@@ -93,9 +97,10 @@ var mergeOption = function(data,title){
                 coordinateSystem: 'geo',
                 data: convertData(data.sort(function (a, b) {
                     return b.value - a.value;
-                }).slice(0, 6)),
+                }).slice(0, 5)),
                 symbolSize: function (val) {
-                    return val[2] / 10;
+                    // return val[2] / 10;
+                    return Math.max(20, Math.min(30, val[2] / 600));
                 },
                 showEffectOn: 'render',
                 rippleEffect: {

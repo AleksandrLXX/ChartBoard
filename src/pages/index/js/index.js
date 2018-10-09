@@ -40,18 +40,20 @@ var chart2Series = new Set();
     let hasIssueType = false;
     board1Data['成果数量（分学科）'].map(item=>{
         !chart2Series.has(item["学科"]) && chart2Series.add(item["学科"])
-        item["论文类型"] && (hasIssueType = true)
-        item["论文类型"] && !chart2Series.has(item["论文类型"]) && chart2Series.add(item["论文类型"])
-        temp_obj[item["成果类型"]] = temp_obj[item["成果类型"]] || [];
-        temp_obj[item["成果类型"]].push(item)
+        let key = item["论文类型"] || item["成果类型"]
+        temp_obj[key] = temp_obj[key] || [];
+        temp_obj[key].push(item)
     })
-    chart2Data = Object.keys(temp_obj).map(key => {
+    console.log(temp_obj)
+    chart2Data = Object.keys(temp_obj).map((key,index) => {
         let arr = temp_obj[key];
         return Array.from(chart2Series).reduce(function(prev,next){
             prev[next] = arr.find(item => item["学科"] == next) ? Number(arr.find(item => item["学科"] == next)["成果数量"]):0;
             return prev;
         }, {
-            category:key
+            category:key,
+            stack:["期刊论文","会议论文","学位论文"].indexOf(key)>-1,
+            index:index
         })
     })
 }
@@ -75,24 +77,15 @@ var chart4Data = board1Data['高被引及热点论文数量'].reduce((prev,next)
     return prev;
 },[])
 
-var chart5Data = (function(arr) {
-    let obj = {};
-    arr.map(item => {
-        let key = item["论文类型"] ? "论文类型" : "成果类型";
-        obj[item[key]] = obj[item[key]] || 0;
-        obj[item[key]] += Number(item["成果数量"])
-    })
-    if ("期刊论文" in obj || "会议论文" in obj || "学术论文" in obj){
-        delete obj["论文"]
-    }
-    return Object.keys(obj).map(item=>{ return {name:item,value:obj[item]}})
-})(board1Data['成果数量（分学科）']);
+var chart5Data = board1Data['成果数量（总）'].map(item=>{
+    return {name:item["成果类型"],value:item["成果数量"]}
+});
 
 var chart7Data = board1Data['ESI学科排名']
-var chart8Data = board1Data['各类型人才数量统计'].filter(item=>new Set(["高级人才","杰出人才","教学科研人员","全校在编教职工"]).has(item["人才类型"]))
-var chart8DataTotal = Number(chart8Data.find(item=>item["人才类型"]=='全校在编教职工')["数量"])
+var chart8Data = board1Data['各类型人才数量统计'].slice(0,4)
+var chart8DataTotal = chart8Data[3]["数量"]
 
-var chart9Data = board1Data['各类型人才数量统计'].filter(item=>!new Set(["高级人才","杰出人才","教学科研人员","全校教职工"]).has(item["人才类型"]))
+var chart9Data = board1Data['各类型人才数量统计']
 var chart10Data;
 var chart10Series = new Set();
 {
@@ -115,7 +108,7 @@ var chart11Data = board1Data["热门研究领域"].map(item=>{
     return item;
 }).sort((prev, next) => next.value-prev.value)
 
-var chart1 = line_render('成果数量(分年)', chart1Data['期刊论文'], '期刊论文')
+var chart1 = line_render('成果数量(分年)', chart1Data)
 var chart2 = interval_render('成果数量(分学科)',chart2Data,Array.from(chart2Series))
 var chart3 = radar_render('成果数量(分数据库)', chart3Data, '成果数量(分数据库)')
 var chart4 = mixed_render('高被引及热点论文数量', chart4Data)
@@ -176,19 +169,16 @@ var chart8 = $('#各类型人才数量统计').html(
 )
 var chart9 = $('#各类型人才数量统计2').html(`
 <div class='flex-shrink-0 flex-grow-0 d-flex flex-column text-white justify-content-around align-items-strech px-3  py-2' style='width:40%;font-size:0.8em;'>
-    ${["两院院士","长江特聘","青年长江","国家千人","青年千人"].map(item=>`
-        <div class='flex-fill d-flex flex-row align-items-center justify-content-between'><div>${item}</div><div>${chart9Data.find(i_item=>i_item["人才类型"]==item)["数量"]}</div></div>
+    ${chart9Data.slice(4,9).map(item=>`
+        <div class='flex-fill d-flex flex-row align-items-center justify-content-between'><div>${item["人才类型"]}</div><div>${item["数量"]}</div></div>
     `).join('')} 
 </div> 
 <div class='flex-shrink-0 flex-grow-0 d-flex flex-column text-white justify-content-around align-items-strech px-3 py-2' style='width:60%;font-size:0.8em;'>
-    ${["文科杰出、资深教授","973首席","万人计划","青年拔尖","杰出青年、优秀青年"].map(item=>`
+    ${chart9Data.slice(9,15).map(item=>`
         <div class='flex-fill d-flex flex-row align-items-center justify-content-between'>
-            <div>${item}</div>
+            <div>${item["人才类型"]}</div>
             <div>
-                ${chart9Data.find(i_item=>i_item["人才类型"]==item)
-                ?chart9Data.find(i_item=>i_item["人才类型"]==item)["数量"]
-                :(chart9Data.find(i_item=>i_item["人才类型"]=='杰出青年')["数量"]+','+chart9Data.find(i_item=>i_item["人才类型"]=='优秀青年')["数量"])
-            }</div>
+                ${item["数量"]}</div>
         </div>
     `).join('')} 
 </div>  
