@@ -1,6 +1,9 @@
 html,body {
     margin: 0;
     padding: 0;
+    width:100%;
+    height:100%;
+    overflow: hidden;
 }
 
 :root {
@@ -25,7 +28,7 @@ div{
 }
 
 .lump{
-    background-color: rgba(0,0,255,.1);
+    /* background-color: rgba(0,0,255,.1); */
 }
 .text-left{
     text-align: left;
@@ -36,17 +39,30 @@ div{
 .text-center{
     text-align: center;
 }
-
+.position-relative{
+    position: relative;
+}
+.position-absolute{
+    position:absolute;
+}
 
 .canvas-board-container{
     width: 3840px;
     height: 2160px;
+    background-color: #404a59;
+    transform-origin: 0 0;
+    transform: scale(0.5)
 }
+
+#video{
+  
+}
+
 .canvas-board-wrapper{
     position: relative;
     overflow: visible;
-    
-    transition: left .3s ease;
+    background-color: #404a59;
+    transition: left 1s ease;
 }
 .canvas-board-wrapper[data-tab='1']{
     left:0;
@@ -84,10 +100,10 @@ div{
     font-weight: 500;
     text-align: center;
 }
-.board1-col-2-row-3 .canvas-container>div>div{
-    width:20%;
-    
+.board1-col-2-row-3 .canvas-container .esi-title>div,.esi_list1>div>div,.esi_list2>div>div {
+    width:20%; 
 }
+
 .board1-col-2-row-3 .canvas-container>div:first-child{
     background-color: var(--main);
     text-shadow:0 0 5px #fff;

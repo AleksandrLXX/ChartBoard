@@ -2,14 +2,14 @@ import echarts from 'echarts';
 
 var labelOption = {
     normal: {
-        show: false,
-        position: "insideBottom",
-        distance:15,
+        show: true,
+        position: "insideTop",
+        distance:0,
         align: "left",
         verticalAlign: 'middle',
         rotate: 90,
-        formatter: '{c}  {name|{a}}',
-        fontSize: 16,
+        formatter: '{c}',
+        fontSize: 20,
         rich: {
             name: {
                 textBorderColor: '#fff'
@@ -35,14 +35,97 @@ var mergeOption = function (data, series) {
             }
         },
         legend: {
-            data: series
+            data: series,
+
+            top:'2%',
+            left:'0%'
         },
         calculable: true,
+        graphic:[{
+            type:'text',
+            rotation:Math.PI/2,
+            // bottom:'5%',
+            // left:'15%',
+            bounding:'raw',
+            position:[145,710],
+            style:{
+                text:'期刊论文',
+                fill:'#fff',
+                // textAlign:'center',
+                // textVerticalAlign:'middle',
+                font:'30px',
+            },
+            z:5,
+        }, {
+            type: 'text',
+            rotation: Math.PI / 2,
+            // bottom:'5%',
+            // left:'15%',
+            bounding: 'raw',
+            position: [205, 710],
+            style: {
+                text: '会议论文',
+                fill: '#fff',
+                // textAlign:'center',
+                // textVerticalAlign:'middle',
+                font: '30px',
+            },
+            z: 5,
+        }, {
+            type: 'text',
+            rotation: Math.PI / 2,
+            // bottom:'5%',
+            // left:'15%',
+            bounding: 'raw',
+            position: [258, 710],
+            style: {
+                text: '学位论文',
+                fill: '#fff',
+                // textAlign:'center',
+                // textVerticalAlign:'middle',
+                font: '30px',
+            },
+            z: 5,
+        }, {
+            type: 'text',
+            // rotation: Math.PI / 2,
+            // bottom:'5%',
+            // left:'15%',
+            bounding: 'raw',
+            position: [400, 605],
+            style: {
+                text: "图书",
+                fill: '#fff',
+                // textAlign:'center',
+                // textVerticalAlign:'middle',
+                font: '30px',
+            },
+            z: 5,
+        }, {
+            type: 'text',
+            // rotation: Math.PI / 2,
+            // bottom:'5%',
+            // left:'15%',
+            bounding: 'raw',
+            position: [600, 605],
+            style: {
+                text: "专利",
+                fill: '#fff',
+                // textAlign:'center',
+                // textVerticalAlign:'middle',
+                font: '30px',
+            },
+            z: 5,
+        }, ],
         xAxis: [{
             gridIndex:0,
             type: 'category',
             axisTick: {
                 show: false
+            },
+            axisLabel:{
+                fontSize:20,
+                show:false
             },
             data: _data[0].category
         },
@@ -52,11 +135,19 @@ var mergeOption = function (data, series) {
             axisTick: {
                 show: false
             },
+            axisLabel: {
+                fontSize: 20,
+                show: false
+            },
             data: _data[1].category
         }, {
             gridIndex: 2,
             type: 'category',
             axisTick: {
+                show: false
+            },
+            axisLabel: {
+                fontSize: 20,
                 show: false
             },
             data: _data[2].category
@@ -66,12 +157,25 @@ var mergeOption = function (data, series) {
             axisTick: {
                 show: false
             },
+           
+            axisLabel: {
+                align:'left',
+                // fontSize: 20,
+                show: false
+            },
             data: _data[3].category
         }, {
             gridIndex: 4,
             type: 'category',
             axisTick: {
                 show: false
+                
+            },
+            axisLabel: {
+                align: 'left',
+                // fontSize: 20,
+                show: false,
+                padding:0,
             },
             data: _data[4].category
         } 
@@ -79,38 +183,44 @@ var mergeOption = function (data, series) {
         grid:[
             {   
                 // id:'期刊论文',
-                bottom:'10%',
-                width:'15%',
+                bottom:'18%',
+                height:'70%',
+                width:'20%',
                 left:'20%',
             },
             {   
                 // id:'会议论文',
-                bottom:'10%',
-                width: '15%',
-                left:'32%',
+                bottom:'18%',
+                height:'70%',
+                width: '20%',
+                left:'28%',
             },
             {   
                 // id:'学位论文',
-                bottom:'10%',
-                 width: '15%',
-                left:'44%',
+                bottom:'18%',
+                height:'70%',
+                 width: '20%',
+                left:'36%',
             },
             {   
                 // id:'图书',
-                bottom:'10%',
-                 width: '35%',
-                left:'55%',
+                bottom:'18%',
+                height:'70%',
+                width: '40%',
+                left:'50%',
             },
             {   
                 // id:'专利',
-                bottom:'10%',
-                width: '35%',
-                left:'75%',
+                bottom:'18%',
+                height:'70%',
+                width: '40%',
+                left:'80%',
             },
         ],
         yAxis: [{
             gridIndex: 0,
-            type: 'value'
+            type: 'value',
+            offset:15,
         }, {
             gridIndex: 1,
             type: 'value',
@@ -134,11 +244,11 @@ var mergeOption = function (data, series) {
                     name: serie,
                     type: 'bar',
                     barGap: 0,
-                    barWidth: next.stack ? '100%': 'auto',
+                    barWidth: next.stack ? '100%': '25%',
                     stack: next.stack?'成果'+next.category:null,
                     xAxisIndex: next.index,
                     yAxisIndex: next.index,
-                    label: labelOption,
+                    label: next.stack ? {show:false}:labelOption,
                     data: [next[serie]]
                 }
             }))

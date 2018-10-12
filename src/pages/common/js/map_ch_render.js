@@ -18,6 +18,7 @@ var convertData = function (data) {
     return res;
 };
 var mergeOption = function(data,title){
+    var dataLen = data.length;
     return  {
         title: {
             show:false,
@@ -47,9 +48,11 @@ var mergeOption = function(data,title){
             map: 'china',
             label: {
                 emphasis: {
-                    show: false
+                    // show: true
                 }
             },
+            top:'5%',
+            bottom:'5%',
             roam: true,
             itemStyle: {
                 normal: {
@@ -61,46 +64,54 @@ var mergeOption = function(data,title){
                 }
             }
         },
-        series: [{
-                name: '国内合作',
-                type: 'scatter',
-                coordinateSystem: 'geo',
-                data: convertData(data.sort(function (a, b) {
-                    return b.value - a.value;
-                }).slice(5)),
-                symbolSize: function (val) {
-                    return Math.max(10,Math.min(20,val[2] / 200));
+        series: [
+            // {
+            //     name: '国内合作',
+            //     type: 'scatter',
+            //     coordinateSystem: 'geo',
+            //     data: convertData(data.sort(function (a, b) {
+            //         return b.value - a.value;
+            //     }).slice(5)),
+            //     symbolSize: function (val,index) {
+            //         console.log('index',index)
+            //         return Math.max(10,Math.min(20,val[2] / 200));
                     
-                },
-                rippleEffect: {
-                    brushType: 'stroke'
-                },
-                label: {
-                    normal: {
-                        formatter: '{b}',
-                        position: 'right',
-                        show: false
-                    },
-                    emphasis: {
-                        show: true
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#ddb926'
-                    }
-                }
-            },
+            //     },
+            //     rippleEffect: {
+            //         brushType: 'stroke'
+            //     },
+            //     label: {
+            //         normal: {
+            //             formatter:'',
+            //             show: true
+            //         },
+            //         emphasis: {
+            //             formatter: '{b}',
+            //             position: 'right',
+            //             show: true
+            //         }
+            //     },
+            //     itemStyle: {
+            //         normal: {
+            //             color: '#ddb926'
+            //         }
+            //     }
+            // },
             {
-                name: 'Top 5',
+                name: '国内合作',
                 type: 'effectScatter',
                 coordinateSystem: 'geo',
                 data: convertData(data.sort(function (a, b) {
-                    return b.value - a.value;
-                }).slice(0, 5)),
-                symbolSize: function (val) {
+                    return Number(a["论文数量"]) - Number(b["论文数量"]);
+                })),
+                symbolSize: function (val,ref) {
                     // return val[2] / 10;
-                    return Math.max(20, Math.min(30, val[2] / 600));
+                    console.log(ref)
+                    if(ref.dataIndex > dataLen-6){
+                        return Math.max(30, Math.min(40, val[2] / 700));
+                    }else{
+                        return Math.max(20, Math.min(30, val[2] / 200));
+                    }
                 },
                 showEffectOn: 'render',
                 rippleEffect: {
@@ -108,7 +119,11 @@ var mergeOption = function(data,title){
                 },
                 hoverAnimation: true,
                 label: {
-                    normal: {
+                     normal: {
+                             formatter: '',
+                             show: true
+                         },
+                    emphasis: {
                         formatter: '{b}',
                         position: 'right',
                         show: true
