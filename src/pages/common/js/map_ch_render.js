@@ -27,7 +27,8 @@ var mergeOption = function(data,title){
             sublink: '',
             left: 'center',
             textStyle: {
-                color: '#fff'
+                fontWeight:'bold',
+                color: 'white'
             }
         },
         tooltip: {

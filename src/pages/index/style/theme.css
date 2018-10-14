@@ -110,6 +110,9 @@ div{
 .canvas-board-wrapper[data-tab='3']{
      left:-200%;
 }
+.canvas-board-wrapper[data-tab='4']{
+     left:-300%;
+}
 .canvas-board {
     width: 3840px;
     height: 2160px;

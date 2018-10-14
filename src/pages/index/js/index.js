@@ -319,6 +319,9 @@ function swipe(){
     var pageIndex = new Array($('.canvas-board').length).fill('0').map((item, index) => index + 1)
     console.log(pageIndex)
     var vid = document.getElementById("video");
+    var vid2 = document.getElementById("video2");
+    vid2.volume = 0;
+    vid2.pause();
     var bgm = document.getElementById("bgm");
     var interval;
     var $canvas_board_wrapper = $('.canvas-board-wrapper')
@@ -339,14 +342,31 @@ function swipe(){
             nextPage()
             interval = setInterval(function () {
                 nextPage()
-                if (pageIndex[0] == 1) {
-                    clearInterval(interval)
-                    vid.currentTime = 0
-                    bgm.currentTime = 0;
-                    vid.play()
+                if(vid2){
+                    if (pageIndex[0] == 4) {
+                        clearInterval(interval)
+                        vid2.currentTime = 0
+                        vid2.play()
+                    }
+                }else{
+                    if (pageIndex[0] == 1) {
+                        clearInterval(interval)
+                        vid.currentTime = 0
+                        bgm.currentTime = 0;
+                        vid.play()
+                    }
                 }
-            }, 180*1000)
+            }, 30*1000)
         })
+        console.log('vid2',vid2)
+        
+        vid2.addEventListener("ended",function(){
+                nextPage()
+                vid.currentTime = 0
+                bgm.currentTime = 0;
+                vid.play()
+            })
+        
     } else {
         interval = setInterval(nextPage, 180*1000)
     }
