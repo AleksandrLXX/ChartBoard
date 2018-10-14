@@ -1,26 +1,42 @@
-import  '../style/bootstrap-reboot.css'
-import  '../style/bootstrap-grid.css'
-import jQuery from 'jquery'
-import '../style/theme.css'
 
-import echarts from 'echarts'
+function onInputFile1Change() {
+   var file = document.getElementById('vid1').files[0];
+   var url = URL.createObjectURL(file);
+   console.log(url);
+   document.getElementById("video").src = url;
+}
+function onInputFile2Change() {
+   var file = document.getElementById('vid2').files[0];
+   var url = URL.createObjectURL(file);
+   console.log(url);
+   document.getElementById("video2").src = url;
+}
+function onInputFile3Change() {
+   var file = document.getElementById('bgmfile').files[0];
+   var url = URL.createObjectURL(file);
+   console.log(url);
+   document.getElementById("bgm").src = url;
+}
+function onInputFile4Change() {
+   var file = document.getElementById('fakejson').files[0];
+  var reader = new FileReader();
+  reader.onload = function () {
+     var result =  JSON.parse(this.result)
+     renderCanvas(result)
+     swipe();
+  }
+  reader.readAsText(file);
+//    document.getElementById("").src = url;
+}
 
-import userTheme from '../../common/js/themeConfig.js'
-import map_ch_render from '../../common/js/map_ch_render.js'
-import line_render from '../../common/js/line_render.js'
-import interval_render from '../../common/js/interval_render.js'
-import radar_render from '../../common/js/radar_render.js'
-import mixed_render from '../../common/js/mixed_render.js'
-import ring_render from '../../common/js/ring_render.js'
-import polar_render from '../../common/js/polar_render.js'
-import multi_ring_render from '../../common/js/multi_ring_render.js'
-import map_world_render from '../../common/js/map_world_render.js'
+$(function() {
+    $('input[type="file"]').on('change',function(){
+        $(this).parent().css('z-index','-1')
+    })
+});
 
-
-
-window.$= jQuery
 // 需要是 echarts 4 的配置方法
-echarts.registerTheme('user', userTheme)
+echarts.registerTheme('user', themeConfig)
 
 const arr2obj = (arr,key='id')=>{
     let obj = {};
@@ -31,14 +47,6 @@ const arr2obj = (arr,key='id')=>{
     return obj
 }
 
-$(function(){
-    $.getJSON('/static/config.json',(config)=>{
-        $.getJSON(config.data_url, (result) => {
-           renderCanvas(result)
-           swipe();
-        })
-    })
-})
 
 function renderCanvas(board1Data) {
     var chart1Data = arr2obj(board1Data['成果数量（分年）'], '成果类型')

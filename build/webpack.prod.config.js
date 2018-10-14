@@ -82,7 +82,7 @@ module.exports = webpackMerge(baseWebpackConfig, {
 			inject: true,
 			minify: {
 				removeComments: true,
-				collapseWhitespace: true,
+				// collapseWhitespace: true,
 				removeAttributeQuotes: true
 			},
 			showErrors: true,

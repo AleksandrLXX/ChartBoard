@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   
+    <meta name="renderer" content="webkit" >
+    <title>复旦学术成果总览</title>
+    <link rel="stylesheet" href="./bootstrap-grid.css">
+    <link rel="stylesheet" href="./bootstrap-reboot.css">
+    <link rel="stylesheet" href="./theme.css">
+</head>
+<body>
+    <div class="canvas-board-container" style="overflow:hidden">
+        <div class="canvas-board-wrapper lump d-flex flex-row align-items-stretch" data-tab='1'>
+            <div class="canvas-board canvas-board0 flex-shrink-0 lump d-flex flex-row align-items-stretch p-0">
+                <video id='video'  style="width:100%;height:100%;" autoplay ></video>
+            </div>
+            <div class="canvas-board canvas-board1 flex-shrink-0 lump d-flex flex-row align-items-stretch">
+                <div class="board1-col-1 lump d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0" >
+                    <div class="board1-col-1-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='成果数量(分年)' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-1-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div class='board1-col-1-row-2-col-1 flex-grow-0 flex-shrink-0 d-flex  flex-row align-items-stretch'>
+                            <div id='成果数量(分学科)' class='canvas-container flex-fill' ></div>
+                        </div>
+                        <div class='flex-fill d-flex flex-row align-items-stretch'>
+                            <div id='成果数量(分数据库)' class='canvas-container flex-fill'></div>
+                        </div>
+                    </div>
+                    <div class="board1-col-1-row-3 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='高被引及热点论文数量' class='canvas-container flex-fill'></div>
+                    </div>
+                </div>
+                <div class="board1-col-2  d-flex flex-column align-items-stretch flex-fill position-relative" style='padding-top:130px;'>
+                    <div class='position-absolute text-center' style='width:100%;top:0;font-family:微软雅黑;font-size: 80px;color:white;' >
+                        复旦学术成果总览
+                    </div>
+                    <div class="board1-col-2-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <!-- <div id='成果数量(分学科)2' class='canvas-container flex-fill'></div> -->
+                    </div>
+                    <div class="board1-col-2-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='国内合作' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-2-row-3 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='ESI学科排名' class='canvas-container flex-fill d-flex flex-column align-items-stretch' style='overflow: hidden;'></div>
+                    </div>
+                </div>
+                <div class="board1-col-3  d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0">
+                    <div class="board1-col-3-row-1 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='各类型人才数量统计' class='canvas-container flex-fill d-flex flex-column align-items-stretch py-2' style='overflow: hidden;'></div>
+                    </div>
+                    <div class="board1-col-3-row-2 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0 py-3">
+                        <div id='各类型人才数量统计2' class='canvas-container flex-fill d-flex flex-row align-items-stretch py-2 px-4' style='overflow: hidden;'></div>
+                    </div>
+                    <div class="board1-col-3-row-3 d-flex flex-row align-items-stretch flex-shrink-0 flex-grow-0">
+                        <div id='获奖统计' class='canvas-container flex-fill'></div>
+                    </div>
+                    <div class="board1-col-3-row-4 d-flex flex-row align-items-stretch flex-fill">
+                        <div id='热门研究领域' class='canvas-container flex-fill'></div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-board canvas-board2 flex-shrink-0 lump d-flex flex-row align-items-stretch position-relative pl-0 pr-0 pb-0">
+                <div id='国际合作1' class='canvas-container flex-fill'></div>
+            </div>
+            <div class="canvas-board canvas-board3 flex-shrink-0 lump d-flex flex-row align-items-stretch p-0">
+                <video id='video2'  style="width:100%;height:100%;" autoplay ></video>
+            </div>
+        </div>
+    </div>
+    <audio src='./bgm.mp3'  autoplay  id="bgm" loop="true" hidden>
+    </audio>
+    <div style='position:absolute;left:50px;top:200px;color:white'>请选择video1(video.mp4) <input type='file' id='vid1' onchange="onInputFile1Change()" /></div>
+    <div style='position:absolute;left:50px;top:300px;color:white'>请选择video2(video2.mp4)  <input type='file' id='vid2' onchange="onInputFile2Change()"/></div>
+    <div style='position:absolute;left:50px;top:400px;color:white'>请选择背景音乐(bgm.mp3)   <input type='file' id='bgmfile' onchange="onInputFile3Change()"/></div>
+    <div style='position:absolute;left:50px;top:500px;color:white'>请选择 数据源 (fake.json)  <input type='file' id='fakejson' onchange="onInputFile4Change()"/></div>
+    
+</body>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script type="text/javascript" src="./echarts.min.js"></script>
+    <script type="text/javascript" src="./themeConfig.js"></script>
+    <script type="text/javascript" src="./world.js"></script>
+    <script type="text/javascript" src="./china.js"></script>
+    <script type="text/javascript" src="./geocoord_collection.js"></script>
+    <script type="text/javascript" src="./interval_render.js"></script>
+    <script type="text/javascript" src="./map_ch_render.js"></script>
+    <script type="text/javascript" src="./map_world_render.js"></script>
+    <script type="text/javascript" src="./radar_render.js"></script>
+    <script type="text/javascript" src="./line_render.js"></script>
+    <script type="text/javascript" src="./mixed_render.js"></script>
+    <script type="text/javascript" src="./ring_render.js"></script>
+    <script type="text/javascript" src="./multi_ring_render.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+</html>
