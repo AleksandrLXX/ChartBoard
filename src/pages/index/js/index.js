@@ -320,8 +320,10 @@ function swipe(){
     console.log(pageIndex)
     var vid = document.getElementById("video");
     var vid2 = document.getElementById("video2");
-    vid2.volume = 0;
-    vid2.pause();
+    if(vid2){
+        vid2.volume = 0;
+        vid2.pause();
+    }
     var bgm = document.getElementById("bgm");
     var interval;
     var $canvas_board_wrapper = $('.canvas-board-wrapper')
@@ -360,7 +362,7 @@ function swipe(){
         })
         console.log('vid2',vid2)
         
-        vid2.addEventListener("ended",function(){
+        vid2&&vid2.addEventListener("ended", function () {
                 nextPage()
                 vid.currentTime = 0
                 bgm.currentTime = 0;
