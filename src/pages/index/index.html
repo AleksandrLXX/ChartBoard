@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    
     <meta name="renderer" content="webkit" >
-	<title>可视化表盘</title>
+	<title>复旦学术成果总览</title>
 </head>
 <body>
     <div class="canvas-board-container" style="overflow:hidden">
-        <div class="canvas-board-wrapper lump d-flex flex-row align-items-stretch" data-tab='2'>
+        <div class="canvas-board-wrapper lump d-flex flex-row align-items-stretch" data-tab='1'>
             <div class="canvas-board canvas-board0 flex-shrink-0 lump d-flex flex-row align-items-stretch p-0">
-                <video id='video' src="/static/video.mp4" style="width:100%;height:100%;" autoplay></video>
+                <video id='video' src="/static/video.mp4" style="width:100%;height:100%;" autoplay preload></video>
             </div>
             <div class="canvas-board canvas-board1 flex-shrink-0 lump d-flex flex-row align-items-stretch">
                 <div class="board1-col-1 lump d-flex flex-column align-items-stretch flex-shrink-0 flex-grow-0" >
@@ -59,11 +59,13 @@
                     </div>
                 </div>
             </div>
-            <div class="canvas-board canvas-board2 flex-shrink-0 lump d-flex flex-row align-items-stretch">
+            <div class="canvas-board canvas-board2 flex-shrink-0 lump d-flex flex-row align-items-stretch position-relative pl-0 pr-0 pb-0">
                 <div id='国际合作1' class='canvas-container flex-fill'></div>
             </div>
         </div>
     </div>
+    <audio src="/static/bgm.mp3" autoplay preload id="bgm" loop="true" hidden>
+    </audio>
     
 </body>
 </html>

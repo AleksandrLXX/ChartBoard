@@ -1,13 +1,13 @@
 import echarts from 'echarts'
 import chinajs from './china'
 import {
-    mMapPlace
+    chinaGeo
 } from './geocoord_collection'
 
 var convertData = function (data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
-        var geoCoord = mMapPlace.find(item=>item.name==data[i]["省"]);
+        var geoCoord = chinaGeo.find(item=>item.name==data[i]["省"]);
         if (geoCoord) {
             res.push({
                 name: data[i]["省"],
@@ -31,7 +31,15 @@ var mergeOption = function(data,title){
             }
         },
         tooltip: {
-            trigger: 'item'
+            trigger: 'item',
+            textStyle:{
+                fontSize:30,
+            },
+            padding:10,
+            formatter:(params)=>{
+                // return dataLen - 1 - params.dataIndex + ' ' + params.name + ' ' + params.value[2]
+                return params.name + ' ' + params.value[2]
+            }
         },
         legend: {
             orient: 'vertical',
@@ -106,16 +114,17 @@ var mergeOption = function(data,title){
                 })),
                 symbolSize: function (val,ref) {
                     // return val[2] / 10;
-                    console.log(ref)
+                    // console.log(ref)
                     if(ref.dataIndex > dataLen-6){
                         return Math.max(30, Math.min(40, val[2] / 700));
                     }else{
                         return Math.max(20, Math.min(30, val[2] / 200));
                     }
                 },
-                showEffectOn: 'render',
+                showEffectOn: 'emphasis',
                 rippleEffect: {
-                    brushType: 'stroke'
+                    brushType: 'stroke',
+                    scale:4
                 },
                 hoverAnimation: true,
                 label: {
@@ -124,17 +133,23 @@ var mergeOption = function(data,title){
                              show: true
                          },
                     emphasis: {
-                        formatter: '{b}',
+                        formatter: '',
                         position: 'right',
                         show: true
                     }
                 },
                 itemStyle: {
                     normal: {
-                        color: '#f4e925',
+                        color: '#edb318',
+                        shadowBlur: 10,
+                        shadowColor: '#333',
+                        
+                    },
+                    emphasis: {
+                        color: 'yellow',
                         shadowBlur: 10,
                         shadowColor: '#333'
-                    }
+                    },
                 },
                 zlevel: 1
             }
@@ -145,6 +160,38 @@ var map_ch_render = (id, data, title) => {
     var chart = echarts.init(document.getElementById(id),'user');
     // 绘制图表
     chart.setOption(mergeOption(data, title));
+    var dataIndexes = new Array(data.length).fill('0').map((item,index)=>index);
+    var interval = setInterval(next,2000);
+    next();
+    var flag = false; 
+    function next(){
+        var lastIndex;
+        if(flag){
+             lastIndex = dataIndexes.shift()
+             dataIndexes.push(lastIndex)
+        }else{
+            flag =true;
+        }
+        let index = dataIndexes[0]
+        
+        chart.dispatchAction({
+            type:'highlight',
+            seriesName: '国内合作',
+            dataIndex:index
+        })
+        flag &&  chart.dispatchAction({
+            type: 'downplay',
+            seriesName: '国内合作',
+            dataIndex: lastIndex
+        })
+        chart.dispatchAction({
+            type: 'showTip',
+            seriesIndex:0,
+            dataIndex: index
+        })
+       
+    }
+
     return chart;
 }
 

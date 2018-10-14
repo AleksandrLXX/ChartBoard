@@ -31,9 +31,11 @@ const arr2obj = (arr,key='id')=>{
     return obj
 }
 
-$.getJSON('/static/fake.json',(result)=>{
-   renderCanvas(result)
-//    swipe();
+$(function(){
+    $.getJSON('/static/fake.json',(result)=>{
+       renderCanvas(result)
+       swipe();
+    })
 })
 
 function renderCanvas(board1Data) {
@@ -50,7 +52,7 @@ function renderCanvas(board1Data) {
             temp_obj[key] = temp_obj[key] || [];
             temp_obj[key].push(item)
         })
-        console.log(temp_obj)
+        // console.log(temp_obj)
         chart2Data = Object.keys(temp_obj).map((key,index) => {
             let arr = temp_obj[key];
             return Array.from(chart2Series).reduce(function(prev,next){
@@ -65,7 +67,7 @@ function renderCanvas(board1Data) {
     }
     
     
-    console.log(chart2Data)
+    // console.log(chart2Data)
     
     var chart3Data = board1Data['成果数量（分数据库）'].map(item=>{
         item.key = item["来源数据库"]
@@ -107,7 +109,7 @@ function renderCanvas(board1Data) {
             return {category:key,items:temp_obj[key]}
         })
     }
-    console.log(chart10Data)
+    // console.log(chart10Data)
     var chart11Data = board1Data["热门研究领域"].map(item=>{
         item.key= item["研究领域名称"]
         item.value = Number(item["论文数量"])
@@ -123,7 +125,7 @@ function renderCanvas(board1Data) {
         $('.board1-col-2-row-1').append(` <div id='成果数量(分学科)${index}' class='canvas-container flex-1' style='width:${100/c5l}%'></div>`)
         ring_render(`成果数量(分学科)${index}`, chart5Data, item.name)
     }) 
-    console.log('chart5Data',chart5Data)
+    // console.log('chart5Data',chart5Data)
     var chart6 = map_ch_render('国内合作',board1Data['国内合作'])
     window.chart6 = chart6
     
@@ -248,6 +250,9 @@ function renderCanvas(board1Data) {
         </svg>
     `)
     var chart10 = multi_ring_render('获奖统计', chart10Data, '获奖统计', Array.from(chart10Series))
+    
+    
+
     var chart11Series = new Set()
     var chart11CountrySeries = new Set()
     var chart11Data = []
@@ -266,10 +271,44 @@ function renderCanvas(board1Data) {
         let idx = schemaArr.indexOf(item["出版年"])
         chart11Data.find(i_item=>i_item[0]==item["国家"])[idx+1]=Number(item["论文数量"])
     })
-    console.log('chart11Data', chart11Data, 'schemaArr', schemaArr, 'chart11Series', chart11Series)
+    // 先按最大值给 数据排序
+    chart11Data.sort((prev, next) => {
+        return Math.max(...next.slice(1)) - Math.max(...prev.slice(1))
+    })
+    // console.log('chart11Data', chart11Data, 'schemaArr', schemaArr, 'chart11Series', chart11Series)
     
+    var chart11GuideData = board1Data["国际合作2"].sort((prev,next)=>{return Number(next["论文数量"])-Number(prev["论文数量"])})
+    var chart11GuideData2 = board1Data["国际合作3"]
+
+    $('.canvas-board2').append(`<div class='board-guide py-3 position-absolute d-flex flex-column align-items-stretch' 
+    style='top:20%;left:2%;z-index:99;color:white;font-size:40px;line-height:1.4;width:650px;'>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='guide-title' style='height:2em;text-align:center'>所有机构</div>
+        <div class='guide-seg d-flex flex-row ' style='height:2em'>
+            <div class='flex-shrink-0 ' style='width:80%'>合作机构</div>
+            <div class='flex-shrink-0 ' style='width:25%'>发文</div>
+        </div>
+        ${chart11GuideData.slice(0,5).map(item=>`<div style='height:2em' class='d-flex flex-row'>
+            <div class='flex-shrink-0' style='width:80%'>${item["国际高校"]}</div>
+            <div class='flex-shrink-0' style='width:25%'>${item["论文数量"]}</div>
+        </div>`).join('')}
+    </div>`).append(`<div class='board-guide py-3 position-absolute d-flex flex-column align-items-stretch' 
+    style='top:20%;right:2%;z-index:99;color:white;font-size:40px;line-height:1.4;width:600px;'>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='position-absolute corner'></div>
+        <div class='guide-title' style='height:2em;text-align:center'>合作概况</div>
+       ${chart11GuideData2.map(item=>`<div style='height:2em' class='d-flex flex-row'>
+            <div class='flex-shrink-0' style='width:70%'>${item["合作概况"]}</div>
+            <div class='flex-shrink-0' style='width:30%'>${item["数量"]}</div>
+        </div>`).join('')}
+    </div>`)
+
     var chart11 = map_world_render('国际合作1',chart11Data,schemaArr)
-    console.log(chart10.getOption())
     
    
     
@@ -278,12 +317,21 @@ function renderCanvas(board1Data) {
 
 function swipe(){
     var pageIndex = new Array($('.canvas-board').length).fill('0').map((item, index) => index + 1)
+    console.log(pageIndex)
     var vid = document.getElementById("video");
+    var bgm = document.getElementById("bgm");
     var interval;
     var $canvas_board_wrapper = $('.canvas-board-wrapper')
     var nextPage = function () {
         pageIndex.push(pageIndex.shift())
+        
         $canvas_board_wrapper.attr('data-tab', pageIndex[0])
+       
+    }
+    if(bgm&&vid){
+        vid.volume = 0;
+        // vid.playbackRate = 2
+        // bgm.playbackRate =2
     }
     if (vid) {
         vid.addEventListener("ended", function (params) {
@@ -294,12 +342,12 @@ function swipe(){
                 if (pageIndex[0] == 1) {
                     clearInterval(interval)
                     vid.currentTime = 0
+                    bgm.currentTime = 0;
                     vid.play()
                 }
-            }, 60000)
+            }, 180*1000)
         })
     } else {
-        interval = setInterval(nextPage, 60000)
-
+        interval = setInterval(nextPage, 180*1000)
     }
 }

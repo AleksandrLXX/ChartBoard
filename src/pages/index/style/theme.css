@@ -17,7 +17,7 @@ html,body {
     --board1-col-3-row-1-h:430px;
     --board1-col-3-row-2-h:450px;
     --board1-col-3-row-3-h:630px;
-    --board1-col-1-row-2-col-1-w:60%;
+    --board1-col-1-row-2-col-1-w:58%;
     --light:#fff;
     --fz:35px;
     --main:#85baa2;
@@ -58,6 +58,43 @@ div{
   
 }
 
+.board-guide{
+    background-color:rgba(255, 255, 255, .05);
+    padding-left: 30px;
+}
+.guide-title{
+    color: #d2dba9;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.guide-seg{
+    color: #d2dba9;
+}
+.board-guide .corner{
+    background-image: url(../../../static/corner.svg);
+    background-size: contain;
+    width:70px;height:70px;
+}
+.board-guide .corner:nth-of-type(1){
+    left:0;top:0;
+    transform:rotate(90deg);
+
+}
+.board-guide .corner:nth-of-type(2){
+    left:0;bottom:0;
+    transform:rotate(0deg);
+
+}
+.board-guide .corner:nth-of-type(3){
+    right:0;top:0;
+    transform:rotate(180deg);
+
+}
+.board-guide .corner:nth-of-type(4){
+    bottom:0;right:0;
+    transform:rotate(-90deg);
+
+}
 .canvas-board-wrapper{
     position: relative;
     overflow: visible;

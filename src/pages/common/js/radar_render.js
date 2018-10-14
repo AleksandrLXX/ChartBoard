@@ -1,8 +1,8 @@
 import echarts from 'echarts'
 
-
 var mergeOption = function (data, title) {
     let _data = data.sort((prev, next) => Number(prev['优先级顺序']) - Number(next['优先级顺序'])).slice(0, 6)
+    console.log(_data)
     let max = _data.map(item=>Number(item.value)).reduce((prev,next)=>{
         next = Math.max(prev,next)
         return next
@@ -22,7 +22,7 @@ var mergeOption = function (data, title) {
             // shape: 'circle',
             name: {
                 textStyle: {
-                    fontSize:30,
+                    fontSize:25,
                     color: '#fff',
                     rotate:true,
                     borderRadius: 3,
